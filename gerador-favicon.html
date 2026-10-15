@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Corrigir Favicon</title>
+</head>
+<body style="font-family: sans-serif; text-align: center; padding: 50px;">
+    <h2>Ajustando as proporções da sua Logo...</h2>
+    <p>O navegador esmaga logos retangulares na aba. Este script cria uma versão perfeitamente quadrada para você!</p>
+    
+    <canvas id="canvas" style="border: 1px dashed #ccc; margin: 20px auto; display: block; max-width: 200px;"></canvas>
+    
+    <a id="download" download="favicon.png" href="#" style="display: inline-block; padding: 10px 20px; background: #011447; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+        Clique aqui se o download não iniciar automaticamente
+    </a>
+
+    <script>
+        const img = new Image();
+        img.src = 'Logo Use Âmbar.webp';
+        img.onload = () => {
+            const size = Math.max(img.width, img.height);
+            const canvas = document.getElementById('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Fundo transparente
+            ctx.clearRect(0, 0, size, size);
+            
+            // Desenha a imagem centralizada
+            const x = (size - img.width) / 2;
+            const y = (size - img.height) / 2;
+            ctx.drawImage(img, x, y);
+            
+            // Converte para PNG
+            const dataUrl = canvas.toDataURL('image/png');
+            document.getElementById('download').href = dataUrl;
+            
+            // Dispara o download automático
+            document.getElementById('download').click();
+            document.body.innerHTML += "<h3 style='color: green; mt-4'>✅ Sucesso! O arquivo favicon.png foi gerado/baixado. Por favor, mova-o para a pasta do projeto (caso tenha ido para Downloads) e me avise!</h3>";
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
